@@ -4,13 +4,18 @@ use Module::Build;
 
 my $builder = Module::Build->new(
     module_name         => 'cPanel::MemTest',
-    license             => 'perl',
-    dist_author         => 'Daniel Muey <http://drmuey.com/cpan_contact.pl>',
+    author              => 'Daniel Muey <dmuey@cpan.org>',
     dist_version_from   => 'lib/cPanel/MemTest.pm',
-    requires => {
-        'Test::More' => 0,
-    },
-    add_to_cleanup      => [ 'cPanel-MemTest-*' ],
+    license             => 'perl',
+    build_requires      => {
+	'Test::More'    => '0.40', 
+	'Module::Build' => '0.3603',
+	'Test::Warn'    => '0.21'
+	},
+    abstract_from       => 'lib/cPanel/MemTest.pm',
+    add_to_cleanup      => ['cPanel-MemTest-*' ],
+    create_makefile_pl  => 'small',
+    autosplit           => 'lib/cPanel/MemTest.pm',
 );
 
-$builder->create_build_script();
+$builder->create_build_script;
